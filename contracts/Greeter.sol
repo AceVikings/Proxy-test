@@ -6,7 +6,15 @@ import "hardhat/console.sol";
 contract Greeter {
     string private greeting;
 
-    constructor(string memory _greeting) {
+    bool once;
+
+    modifier onlyOnce{
+        require(!once,"Can be called only once");
+        _;
+        once = !once;
+    }
+
+    function Initializable(string memory _greeting) external onlyOnce {
         console.log("Deploying a Greeter with greeting:", _greeting);
         greeting = _greeting;
     }
