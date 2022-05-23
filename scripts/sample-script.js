@@ -15,7 +15,7 @@ async function main() {
 
   // We get the contract to deploy
   const Greeter = await hre.ethers.getContractFactory("Greeter");
-  const greeter = await Greeter.deploy("Hello, Hardhat!");
+  const greeter = await hre.upgrades.deployProxy(Greeter,["Hello world"],{initializer:"Initializable"});
 
   await greeter.deployed();
 
